@@ -1,7 +1,5 @@
 # DocuQuery-AI-Powered-PDF-Knowledge-Assistant-Using-Google-Gemini-API
 
-# Chat with PDF Using Gemini API
-
 This project allows you to upload a PDF document, extract its text, and interact with it through a question-answering system powered by Google's Gemini API. It utilizes **LangChain**, **Streamlit**, **FAISS**, and **Google Generative AI Embeddings** to process the text and provide detailed answers to user queries.
 
 ## Features
@@ -29,8 +27,8 @@ Ensure you have the following installed:
 1. **Clone the repository**:
 
     ```bash
-    git clone https://github.com/your-repository/chat-pdf-gemini
-    cd chat-pdf-gemini
+    git clone https://github.com/Ravikumarchavva/DocuQuery-AI-Powered-PDF-Knowledge-Assistant-Using-Google-PALM.git
+    cd DocuQuery-AI-Powered-PDF-Knowledge-Assistant-Using-Google-PALM.git
     ```
 
 2. **Create a virtual environment (optional but recommended)**:

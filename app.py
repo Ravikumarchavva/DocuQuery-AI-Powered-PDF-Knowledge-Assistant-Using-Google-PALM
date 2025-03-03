@@ -16,6 +16,7 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 
 def get_pdf_text(pdf_docs):
+    """ Extract text from PDF files """
     text=""
     for pdf in pdf_docs:
         pdf_reader= PdfReader(pdf)
@@ -23,21 +24,22 @@ def get_pdf_text(pdf_docs):
             text+= page.extract_text()
     return  text
 
-
-
 def get_text_chunks(text):
+    """ Split text into chunks. We will use these chunks to create a vector store """
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=100_000, chunk_overlap=1000)
     chunks = text_splitter.split_text(text)
     return chunks
 
 
 def get_vector_store(text_chunks):
+    """ Create a vector store using the text chunks """
     embeddings = GoogleGenerativeAIEmbeddings(model = "models/embedding-001")
     vector_store = FAISS.from_texts(text_chunks, embedding=embeddings)
     vector_store.save_local("faiss_index")
 
 
 def get_conversational_chain():
+    """ Create a conversational chain using the Gemini model """
 
     prompt_template = """
     Answer the question as detailed as possible from the provided context, make sure to provide all the details, if the answer is not in
@@ -59,6 +61,7 @@ def get_conversational_chain():
 
 
 def user_input(user_question):
+    """ Get user question and return the response """
     embeddings = GoogleGenerativeAIEmbeddings(model = "models/embedding-001")
     
     new_db = FAISS.load_local("faiss_index", embeddings, allow_dangerous_deserialization=True)
@@ -78,6 +81,7 @@ def user_input(user_question):
 
 
 def main():
+    """ Document Chat Application """
     st.set_page_config("Chat PDF")
     st.header("Chat with PDF📃 using Gemini")
 
